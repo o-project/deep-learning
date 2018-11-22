@@ -3,5 +3,5 @@
   yum:
     name: '*'
     state: latest
-- name: chwon -R /machine-learning
-  shell: bash -lc "chown -R vagrant /machine-learning"
+- name: chwon -R /deep-learning
+  shell: bash -lc "chown -R vagrant /deep-learning"
