@@ -1,0 +1,27 @@
+---
+- name: 必要なソフトウェアをインストール
+  yum: 
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+  with_items:
+    - '*'
+    - git
+- name: git clone https://github.com/yyuu/pyenv.git
+  git:
+    repo: 'https://github.com/yyuu/pyenv.git'
+    dest: /home/vagrant/.pyenv
+  become_user: vagrant
+- name: 環境変数の設定
+  lineinfile:
+    dest: /home/vagrant/.bashrc
+    owner: vagrant
+    group: vagrant
+    line: "{{item}}"
+  with_items:
+    - 'export PYENV_ROOT="$HOME/.pyenv"'
+    - 'export PATH="$PYENV_ROOT/bin:$PATH"'
+    - 'eval "$(pyenv init -)"'
+- name: 環境変数の反映
+  shell: bash -lc "source /home/vagrant/.bashrc"
+  become_user: vagrant

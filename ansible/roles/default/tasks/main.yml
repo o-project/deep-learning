@@ -1,0 +1,7 @@
+---
+- name: パッケージをアップデートする
+  yum:
+    name: '*'
+    state: latest
+- name: chwon -R /machine-learning
+  shell: bash -lc "chown -R vagrant /machine-learning"
